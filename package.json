@@ -7,6 +7,7 @@
   "author": "Tony",
   "license": "MIT",
   "scripts": {
+    "start": "node lib/index.js",
     "type-check": "./node_modules/.bin/tsc --noEmit",
     "type-check:watch": "yarn type-check -- --watch",
     "build": "yarn build:types && yarn build:js",

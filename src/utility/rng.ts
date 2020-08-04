@@ -27,17 +27,24 @@ import { nativeMath } from "./engine/nativeMath";
 import { Engine } from "./types";
 */
 
-class TestEngine implements Engine
+export class TestEngine implements Engine
 {
   private index = 0;
   private values: number[] = [];
-  private getNextValue = () => 0;
 
-  public constructor(args?: number[]){
-    if(args == null){
+  private getNextValue(): number {
+    this.index++;
+    if(this.index >= this.values.length) this.index = 0;
+    return this.values[this.index];
+  }
+
+  public constructor(args: number[] = []){
+    if(args == null || args.length < 1){
       this.index = 0;
       this.values = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
     }
+
+    this.values = [...args];
   }
 
   next(): number {
@@ -50,12 +57,12 @@ const createRng = () => {
   return new Random(nodeCrypto);
 }
 
-const createTestRng = (arr?: number[]) => {
-
+export const createTestRng = (arr?: number[]) => {
+  return new Random(new TestEngine(arr ?? []))
 }
 
 let r: Random | null = null;
-let isInit: boolean = false;
+let init: boolean = false;
 const get = () => {
   if(r === null){
     r = createRng();
@@ -65,6 +72,8 @@ const get = () => {
 }
 
 const RNG = {
-  isInit,
+  isInit: () => { return init },
   get,
 }
+
+export default RNG;
