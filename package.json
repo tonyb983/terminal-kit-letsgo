@@ -12,7 +12,7 @@
     "build": "yarn build:types && yarn build:js",
     "build:types": "./node_modules/.bin/tsc --emitDeclarationOnly",
     "build:js": "./node_modules/.bin/babel src --out-dir lib --extensions \".ts,.tsx\" --source-maps inline",
-    "run": "yarn build && node lib/index.js",
+    "go": "yarn build && node lib/index.js",
     "tree": "tree -I 'node_modules'",
     "ls": "ls -a"
   },
@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "@types/terminal-kit": "^1.28.2",
+    "random-js": "^2.1.0",
     "terminal-kit": "^1.42.0"
   }
 }
